@@ -38,3 +38,39 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Why Next.js is better
+
+### Problems In React:
+
+- Waterfalling
+
+  - Sending multiple backend requests to servers and getting the data and rendering it onto the browser.
+  - First Time gets an empty index.html file.
+  - Fetches all the .js files.
+  - send the backend requests to get the user details.
+  - Not a good approach.
+
+- Not SEO Optimized
+
+  - Search engine gets the information about the website using the HTML of the website and are not able to read the .js file.
+  - Search engine are not able to know what the website is doing and how .js files are working.
+
+- JS don't run on Emails
+  - Emails can't run JS they only shows the HTML files.
+
+### Solution:
+
+- **Server Side Rendering**
+
+  - First render is done on the server side and then the HTML and all the Js files along with the React code is send to the client for handling the other requests.
+  - In React, SSR is done using [renderToStaticMarkup from ReactDOM/server] method.
+
+### NEXT Features & Facts:
+
+- Import only useful libraries on servers to keep the bundle size small.
+- Needs a running server has access to the backend.
+- No access to the browser constructs.
+- Can't run Hooks Does not understand states.
+- Let's us to write http backends no need to make express routes.
+- we can write both the frontend and backend in NEXT.js
