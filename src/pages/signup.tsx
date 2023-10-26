@@ -54,14 +54,14 @@ const signup = () => {
             size={"large"}
             variant="contained"
             onClick={async () => {
-              // const response = await axios.post(`${BASE_URL}/admin/signup`, {
-              //   username: email,
-              //   password: password
-              // });
-              // let data = response.data;
-              // localStorage.setItem("token", data.token);
-              // // window.location = "/"
-              // setUser({ userEmail: email, isLoading: false });
+              const response = await axios.post(`${BASE_URL}/admin/signup`, {
+                username: email,
+                password: password
+              });
+              let data = response.data;
+              localStorage.setItem("token", data.token);
+              // window.location = "/"
+              setUser({ userEmail: email, isLoading: false });
               router.push("/courses");
             }}
           >
