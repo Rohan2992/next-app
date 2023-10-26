@@ -1,26 +1,10 @@
 import { Button, Card, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router.js";
 import { Course } from "@/store/atoms/course.js";
 import { BASE_URL } from "@/config";
 
-function Courses() {
-  const [courses, setCourses] = useState([]);
-
-  const init = async () => {
-    const response = await axios.get(`${BASE_URL}/api/admin/courses/`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-      }
-    });
-    setCourses(response.data.courses);
-  };
-
-  useEffect(() => {
-    init();
-  }, []);
-
+function Courses({ courses }: { courses: Course[] }) {
   return (
     <div
       style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
@@ -32,7 +16,7 @@ function Courses() {
   );
 }
 
-export function Course({ course }: { course: Course }) {
+function Course({ course }: { course: Course }) {
   const router = useRouter();
 
   return (
@@ -50,7 +34,7 @@ export function Course({ course }: { course: Course }) {
       <Typography textAlign={"center"} variant="subtitle1">
         {course.description}
       </Typography>
-      <img alt="Image" src={course.imageLink} style={{ width: 300 }}></img>
+      <img alt="An Image" src={course.imageLink} style={{ width: 300 }}></img>
       <div style={{ display: "flex", justifyContent: "center", marginTop: 20 }}>
         <Button
           variant="contained"
@@ -67,3 +51,19 @@ export function Course({ course }: { course: Course }) {
 }
 
 export default Courses;
+
+export async function getServerSideProps() {
+  console.log("hit here");
+  const response = await axios.get(`${BASE_URL}/api/admin/courses/`, {
+    headers: {
+      // Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  });
+  //   console.log(response.data);
+
+  return {
+    props: {
+      courses: response.data.courses
+    }
+  };
+}
